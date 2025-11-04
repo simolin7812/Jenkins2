@@ -1,8 +1,8 @@
 pipeline {
   agent any
   tools {
-    jdk 'JDK17'
-    maven 'Maven3'   // mvnw 쓰면 빼도 됨. steps에서 ./mvnw로 실행 가능
+    jdk 'JAVA'
+    maven 'maven3'   // mvnw 쓰면 빼도 됨. steps에서 ./mvnw로 실행 가능
   }
   environment {
     APP_NAME   = 'login-app'                       // WAR 이름 & context path
