@@ -2,13 +2,13 @@ pipeline {
   agent any
   tools {
     jdk 'JAVA'
-    //maven 'maven3'   // mvnw 쓰면 빼도 됨. steps에서 ./mvnw로 실행 가능
+    maven 'maven3'   // mvnw 쓰면 빼도 됨. steps에서 ./mvnw로 실행 가능
   }
   environment {
     APP_NAME   = 'login-app'                       // WAR 이름 & context path
     TOMCAT_URL = 'http://192.168.0.193:80'    // Tomcat 접근 URL
     CRED_ID    = 'tomcat-deployer'             // Jenkins 크리덴셜 ID
-    USE_WRAPPER = 'true'                            // 'true'면 ./mvnw 사용
+    USE_WRAPPER = 'false'                            // 'true'면 ./mvnw 사용
   }
   options {
     timestamps()
