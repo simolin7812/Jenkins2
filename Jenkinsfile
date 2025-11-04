@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  tools { maven 'Maven3' }   // Global Tool에 등록한 이름
+  tools { maven 'maven3' }   // Global Tool에 등록한 이름
   options { timestamps() }
 
   environment {
