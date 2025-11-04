@@ -1,15 +1,15 @@
 pipeline {
-  agent any
-  tools { maven 'maven3' }   // Global Tool에 등록한 이름
+  agent any 
+  tools { maven 'maven3' }  
   options { timestamps() }
 
   environment {
     APP_NAME   = 'login-app'
-    TOMCAT_URL = 'http://192.168.0.193:80'
+    TOMCAT_URL = 'http://192.168.0.10:80'
     CRED_ID    = 'tomcat-deploy'
   }
 
-  stages {
+ stages {
     stage('Checkout') {
       steps { checkout scm }
     }

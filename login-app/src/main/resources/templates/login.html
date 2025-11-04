@@ -8,5 +8,8 @@
     <div><label>Password: <input type="password" name="password"/></label></div>
     <div><button type="submit">Login</button></div>
   </form>
+  <p><a th:href="@{/register}">회원가입</a></p>
+  <div th:if="${param.error}">로그인 실패: 아이디 또는 비밀번호를 확인하세요.</div>
+  <div th:if="${param.logout}">로그아웃되었습니다.</div>
 </body>
 </html>
