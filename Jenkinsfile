@@ -1,0 +1,50 @@
+pipeline {
+  agent any
+  tools { maven 'maven3' }   // Global Tool에 등록한 이름
+  options { timestamps() }
+
+  environment {
+    APP_NAME   = 'login-app'
+    TOMCAT_URL = 'http://192.168.0.193:80'
+    CRED_ID    = 'tomcat-deploy'
+  }
+
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+
+    stage('Build WAR') {
+      steps {
+        dir('login-app'){
+          sh 'mvn -B clean package -DskipTests'
+          stash includes: 'target/*.war', name: 'war'
+        }
+        }
+      post {
+        success {
+          archiveArtifacts artifacts: 'login-app/target/*.war', fingerprint: true
+        }
+      }
+    }
+
+    stage('Deploy to Tomcat (Manager API)') {
+      steps {
+        unstash 'war'
+        withCredentials([usernamePassword(credentialsId: "${CRED_ID}", usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+          sh """
+            curl -sf -u "$USER:$PASS" "${TOMCAT_URL}/manager/text/undeploy?path=/${APP_NAME}" || true
+            curl -sf -u "$USER:$PASS" \
+              -T login-app/target/${APP_NAME}.war \
+              "${TOMCAT_URL}/manager/text/deploy?path=/${APP_NAME}&update=true"
+          """
+        }
+      }
+    }
+  }
+
+  post {
+    success { echo "배포 완료: ${TOMCAT_URL}/${APP_NAME}/" }
+  }
+}
+
