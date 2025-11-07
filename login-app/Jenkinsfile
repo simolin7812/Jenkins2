@@ -50,6 +50,7 @@ pipeline {
   }
 
   post {
-    success { echo "배포 완료: ${TOMCAT_URL}/${APP_NAME}/" }
+    success { echo "배포 완료: ${TOMCAT_URL_1}/${APP_NAME}/" }
+    success { echo "배포 완료: ${TOMCAT_URL_2}/${APP_NAME}/" }
   }
 }
