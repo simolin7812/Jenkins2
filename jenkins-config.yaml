@@ -9,8 +9,8 @@ jenkins:
   - kubernetes:
       containerCap: 10
       containerCapStr: "10"
-      jenkinsTunnel: "jenkins-agent:50000"
-      jenkinsUrl: "http://jenkins:80"
+      jenkinsTunnel: "192.168.0.52:50000"
+      jenkinsUrl: "192.168.0.52:80"
       maxRequestsPerHost: 32
       maxRequestsPerHostStr: "32"
       name: "kubernetes"
@@ -27,7 +27,7 @@ jenkins:
           - envVar:
               key: "JENKINS_URL"
               value: "http://192.168.0.52"
-          image: "jenkins/inbound-agent:4.3-4"
+          image: "jenkins/inbound-agent:latest"
           livenessProbe:
             failureThreshold: 0
             initialDelaySeconds: 0
