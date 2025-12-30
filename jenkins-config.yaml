@@ -35,10 +35,10 @@ jenkins:
             successThreshold: 0
             timeoutSeconds: 0
           name: "jnlp"
-          resourceLimitCpu: "512m"
-          resourceLimitMemory: "512Mi"
-          resourceRequestCpu: "512m"
-          resourceRequestMemory: "512Mi"
+          resourceLimitCpu: "128m"
+          resourceLimitMemory: "128Mi"
+          resourceRequestCpu: "128m"
+          resourceRequestMemory: "128Mi"
           workingDir: "/home/jenkins"
         hostNetwork: false
         label: "jenkins-jenkins-slave "
@@ -53,8 +53,8 @@ jenkins:
             hostPath: "/usr/bin/kubectl"
             mountPath: "/usr/bin/kubectl"
         - hostPathVolume:
-            hostPath: "/bin/docker"
-            mountPath: "/bin/docker"
+            hostPath: "/usr/bin/docker"
+            mountPath: "/usr/bin/docker"
         - hostPathVolume:
             hostPath: "/var/run/docker.sock"
             mountPath: "/var/run/docker.sock"
